@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %} | {{match.title}} {% endblock %}
+
+{% block content %}
+<!-- Breadcrumb -->
+<section id="bc" class="mt-3">
+     <div class="container">
+          <nav aria-label="breadcrumb">
+               <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                         <a href="{% url 'index' %}">
+                              <i class="fas fa-home"></i> Home</a>
+                    </li>
+                    <li class="breadcrumb-item"><a href="{% url 'matches' %}"> Browse By</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'matchLeagues' %}">League</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'matchLeague' league.id %}">{{league.league_name}}</a></li>
+                    <li class="breadcrumb-item active"><a href="{% url 'match' league.id match.id %}">{{match.title}}</a></li>
+               </ol>
+          </nav>
+     </div>
+</section>
+
+<h4 style="text-align:center">{{match.title}}</h4>
+<div class="row py-2 text-secondary">
+          <div class="col-3">
+                    Prob of First Half Goal Based on Home Team's Performance at Home: {{ match.prob_goal_fh_home }}</div>
+                  <div class="col-3">
+                      Prob of First Half Goal Based on Away Team's Performance Away: {{ match.prob_goal_fh_away }}</div>
+                      <div class="col-3">
+                              Prob of Second Half Goal Based on Home Team's Performance at Home: {{ match.prob_goal_sh_home }}</div>
+                            <div class="col-3">
+                                Prob of Second Half Goal Based on Away Team's Performance Away: {{ match.prob_goal_sh_away }}</div>
+     <hr>
+</div>
+{% endblock %}

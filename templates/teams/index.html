@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% load humanize %}
+
+{% block title %} | Teams {% endblock %}
+
+
+{% block content %}
+<!-- Breadcrumb -->
+<section id="bc" class="mt-3">
+     <div class="container">
+          <nav aria-label="breadcrumb">
+               <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                         <a href="index.html">
+                              <i class="fas fa-home"></i> Home</a>
+                    </li>
+                    <li class="breadcrumb-item active"> Browse Teams</li>
+               </ol>
+          </nav>
+     </div>
+</section>
+<!-- Listings -->
+<section id="listings" class="py-4">
+     <div class="container">
+          <div class="row">
+               <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Browse By:</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                          <th scope="row"><a href="{% url 'teamLeagues' %}">League</a></th>
+                        </tr>
+                  </tbody>
+                </table>
+          </div>
+     </div>
+</section>
+{% endblock %}
