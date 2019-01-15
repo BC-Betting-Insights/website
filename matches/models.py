@@ -18,6 +18,10 @@ class Match(models.Model):
     is_played = models.BooleanField(default=True)
     list_date = models.DateTimeField(default = datetime.now)
 
+    def slug(self):
+        slug = self.title.replace(" ", "-")
+        return slug
+
     def away_possession(self):
         away_posession = 100-self.home_possession
         return away_posession

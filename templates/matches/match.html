@@ -21,7 +21,7 @@
      </div>
 </section>
 
-<h4 style="text-align:center">{{match.title}}</h4>
+<h4 style="text-align:center"><a href="{% url 'team' match.home_team.division.id match.home_team.id %}">{{match.home_team}}</a> v <a href="{% url 'team' match.away_team.division.id match.away_team.id %}">{{match.away_team}}</a></h4>
 <div class="row py-2 text-secondary">
           <div class="col-3">
                     Prob of First Half Goal Based on Home Team's Performance at Home: {{ match.prob_goal_fh_home }}</div>
