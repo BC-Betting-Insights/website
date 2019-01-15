@@ -16,7 +16,7 @@
         </li>
         <li class="breadcrumb-item"><a href="{% url 'matches' %}"> Browse By</a></li>
         <li class="breadcrumb-item"><a href="{% url 'matchLeagues' %}">League</a></li>
-        <li class="breadcrumb-item"><a href="{% url 'matchLeague' league.id %}">{{league.league_name}}</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'matchLeague' league.slug %}">{{league.league_name}}</a></li>
       </ol>
     </nav>
   </div>
@@ -36,7 +36,7 @@
           </div>
           <div class="card-body">
             <div class="listing-heading text-center">
-              <h4 class="text-primary"><a href="{% url 'team' match.home_team.division.id match.home_team.id %}">{{match.home_team}}</a> v <a href="{% url 'team' match.away_team.division.id match.away_team.id %}">{{match.away_team}}</a></h4>
+              <h4 class="text-primary"><a href="{% url 'team' match.home_team.division.slug match.home_team.slug %}">{{match.home_team}}</a> v <a href="{% url 'team' match.away_team.division.slug match.away_team.slug %}">{{match.away_team}}</a></h4>
             </div>
             <hr>
             <div class="row py-2 text-secondary">
@@ -58,7 +58,7 @@
               <i class="fas fa-clock"></i>{{ match.date }}
             </div>
             <hr>
-            <a href="{% url 'match' league.id match.id %}" class="btn btn-primary btn-block">More Info</a>
+            <a href="{% url 'match' league.slug match.slugif %}" class="btn btn-primary btn-block">More Info</a>
           </div>
         </div>
       </div>

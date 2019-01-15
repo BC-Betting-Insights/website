@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models import Q, F
 from datetime import datetime
+from django.template.defaultfilters import slugify
 
 
 class Match(models.Model):
@@ -17,9 +18,21 @@ class Match(models.Model):
     away_shots_target = models.IntegerField()
     is_played = models.BooleanField(default=True)
     list_date = models.DateTimeField(default = datetime.now)
+    
+    slug = models.SlugField()
+    league_slug = models.SlugField()
 
-    def slug(self):
-        slug = self.title.replace(" ", "-")
+    def save(self, *args, **kwargs):
+        if not self.id:
+            # Newly created object, so set slug
+            self.slug = slugify(self.title())
+            self.league_slug = slugify(self.home_team.division.league_name)
+        super(Match, self).save(*args, **kwargs)
+
+    def slugif(self):
+        title = self.title()
+        slug = self.slug = slugify(title)
+        self.save()
         return slug
 
     def away_possession(self):

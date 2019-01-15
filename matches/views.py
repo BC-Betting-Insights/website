@@ -20,10 +20,11 @@ def matchLeagues(request):
     return render(request, 'matches/leagues.html', context)
     
 
-def matchLeague(request, league_id):
-    matches = Match.objects.order_by('-date').filter(home_team__id=league_id).filter(is_played=False)
+def matchLeague(request, league_slug):
+    matches = Match.objects.order_by('-date').filter(home_team__league_slug=league_slug).filter(is_played=False)
+    
 
-    league = get_object_or_404(League, id=league_id)
+    league = get_object_or_404(League, slug=league_slug)
 
     paginator = Paginator(matches, 6)
     page = request.GET.get('page')
@@ -33,11 +34,12 @@ def matchLeague(request, league_id):
         'matches': paged_matches,
         'league': league
     }
+
     return render(request, 'matches/league.html', context)
 
-def match(request, league_id, match_id):
-    league = get_object_or_404(League, id=league_id)
-    match = get_object_or_404(Match, id=match_id)
+def match(request, league_slug, match_slug):
+    league = get_object_or_404(League, slug=league_slug)
+    match = get_object_or_404(Match, slug=match_slug)
 
     context = {
         'league': league,

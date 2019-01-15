@@ -16,7 +16,7 @@
           </li>
           <li class="breadcrumb-item"><a href="{% url 'teams' %}"> Browse Teams by League </a></li>
 
-          <li class="breadcrumb-item active"><a href="{% url 'teamLeague' league.id %}">{{league.league_name}}</a></li>
+          <li class="breadcrumb-item active"><a href="{% url 'teamLeague' league.slug %}">{{league.league_name}}</a></li>
         </ol>
       </nav>
     </div>
@@ -35,7 +35,7 @@
               <tbody>
             {% for team in teams %}
                   <tr>
-                    <th scope="row"><a href="{% url 'team' team.division.id team.id %}">{{ team.name }}</a></th>
+                    <th scope="row"><a href="{% url 'team' team.division.slug team.slug %}">{{ team.name }}</a></th>
                   </tr>
           {% endfor %}
             </tbody>

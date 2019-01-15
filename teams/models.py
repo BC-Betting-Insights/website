@@ -2,12 +2,22 @@ from django.db import models
 from django.db.models import Q, F, Sum
 from leagues.models import League
 from matches.models import Match
+from django.template.defaultfilters import slugify
 # from django.apps import apps
 # Matches = apps.get_model('app1', 'Matches')
 
 class Team(models.Model):
     name = models.CharField(max_length=200)
     division = models.ForeignKey(League, related_name='league', on_delete=models.DO_NOTHING)
+    slug = models.SlugField()
+    league_slug = models.SlugField()
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            # Newly created object, so set slug
+            self.slug = slugify(self.name)
+            self.league_slug = slugify(self.division.league_name)
+        super(Team, self).save(*args, **kwargs)
 
     def games(self):
         games = self.home_games() + self.away_games()

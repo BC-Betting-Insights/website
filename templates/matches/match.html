@@ -14,14 +14,14 @@
                     </li>
                     <li class="breadcrumb-item"><a href="{% url 'matches' %}"> Browse By</a></li>
                     <li class="breadcrumb-item"><a href="{% url 'matchLeagues' %}">League</a></li>
-                    <li class="breadcrumb-item"><a href="{% url 'matchLeague' league.id %}">{{league.league_name}}</a></li>
-                    <li class="breadcrumb-item active"><a href="{% url 'match' league.id match.id %}">{{match.title}}</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'matchLeague' league.slug %}">{{league.league_name}}</a></li>
+                    <li class="breadcrumb-item active"><a href="{% url 'match' league.slug match.slug %}">{{match.title}}</a></li>
                </ol>
           </nav>
      </div>
 </section>
 
-<h4 style="text-align:center"><a href="{% url 'team' match.home_team.division.id match.home_team.id %}">{{match.home_team}}</a> v <a href="{% url 'team' match.away_team.division.id match.away_team.id %}">{{match.away_team}}</a></h4>
+<h4 style="text-align:center"><a href="{% url 'team' match.home_team.division.slug match.home_team.slug %}">{{match.home_team}}</a> v <a href="{% url 'team' match.away_team.division.slug match.away_team.slug %}">{{match.away_team}}</a></h4>
 <div class="row py-2 text-secondary">
           <div class="col-3">
                     Prob of First Half Goal Based on Home Team's Performance at Home: {{ match.prob_goal_fh_home }}</div>

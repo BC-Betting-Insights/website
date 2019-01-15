@@ -11,6 +11,9 @@ def index(request):
     matches = Match.objects.order_by('-date').filter(is_played = False)[:3]
     leagues = League.objects.order_by('league_name')
     games_played = Match.objects.count()
+
+    
+
     context = {
         'matches': matches,
         'games_played': games_played,

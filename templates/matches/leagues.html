@@ -34,7 +34,7 @@
                     <tbody>
                          {% for league in leagues %}
                          <tr>
-                              <th scope="row"><a href="{% url 'matchLeague' league.id %}">{{ league.league_name }}</a></th>
+                              <th scope="row"><a href="{% url 'matchLeague' league.slug %}">{{ league.league_name }}</a></th>
                          </tr>
                          {% endfor %}
                     </tbody>

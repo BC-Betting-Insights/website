@@ -7,9 +7,22 @@ from leagues.models import League
 from matches.models import Match
 from django.db.models import Q, F, Sum
 
+import http.client
+import json
+
 
 def index(request):
-    return render(request, 'teams/index.html')
+    connection = http.client.HTTPConnection('api.football-data.org')
+    headers = { 'X-Auth-Token': '1f39c6d5a29947f282f44dfd0aa460f5' }
+    connection.request('GET', '/v2/competitions/PL/matches/?matchday=22', None, headers )
+    response = json.loads(connection.getresponse().read().decode())
+
+    context = {
+        'response': response
+    }
+    # print (response)
+
+    return render(request, 'teams/index.html', context)
 
 def teamLeagues(request):
     
@@ -24,19 +37,19 @@ def teamLeagues(request):
     }
     return render(request, 'teams/leagues.html', context)
 
-def teamLeague(request, league_id):
-    teams = Team.objects.order_by('name').filter(division=league_id)
-    league = get_object_or_404(League, id=league_id)
+def teamLeague(request, league_slug):
+    teams = Team.objects.order_by('name').filter(league_slug=league_slug)
+    league = get_object_or_404(League, slug=league_slug)
     context = {
         'teams': teams,
         'league': league
     }
     return render(request, 'teams/league.html', context)
 
-def team(request, league_id, team_id):
-    team = get_object_or_404(Team, id=team_id)
-    matches = Match.objects.order_by('date').filter(Q(home_team = team_id) | Q(away_team = team_id))
-    league = get_object_or_404(League, id=league_id)
+def team(request, league_slug, team_slug):
+    team = get_object_or_404(Team, slug=team_slug)
+    matches = Match.objects.order_by('date').filter(Q(home_team__slug = team_slug) | Q(away_team__slug = team_slug))
+    league = get_object_or_404(League, slug=league_slug)
     context = {
         'team': team,
         'matches': matches,
