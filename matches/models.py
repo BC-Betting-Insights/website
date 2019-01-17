@@ -9,15 +9,16 @@ class Match(models.Model):
     away_team = models.ForeignKey('teams.Team', related_name='away_team', on_delete=models.DO_NOTHING)
     date = models.DateField()
     time = models.TimeField(default = '15:00:00')
-    home_goals = models.IntegerField()
-    away_goals = models.IntegerField()
-    home_goals_first_half = models.IntegerField()
-    away_goals_first_half = models.IntegerField()
+    home_goals = models.IntegerField(null=True)
+    away_goals = models.IntegerField(null=True)
+    home_goals_first_half = models.IntegerField(null=True)
+    away_goals_first_half = models.IntegerField(null=True)
     home_possession = models.IntegerField()
     home_shots_target = models.IntegerField()
     away_shots_target = models.IntegerField()
     is_played = models.BooleanField(default=True)
     list_date = models.DateTimeField(default = datetime.now)
+    matchday = models.IntegerField(null=True)
     
     slug = models.SlugField()
     league_slug = models.SlugField()
@@ -60,14 +61,16 @@ class Match(models.Model):
         return output
 
     def first_half_goals(self):
-        output = self.home_goals_first_half + self.away_goals_first_half
-        return output
+        if self.home_goals_first_half != None:
+            output = self.home_goals_first_half + self.away_goals_first_half
+            return output
     
     def second_half_goals(self):
-        fhg = self.first_half_goals()
-        output = self.home_goals + self.away_goals  - fhg
-        shg = models.IntegerField()
-        return output
+        if self.first_half_goals() != None:
+            fhg = self.first_half_goals()
+            output = self.home_goals + self.away_goals  - fhg
+            shg = models.IntegerField()
+            return output
 
     def played(self):
         if self.date <= datetime.now:

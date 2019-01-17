@@ -15,13 +15,15 @@ def matchLeagues(request):
     paged_leagues = paginator.get_page(page)
 
     context = {
-        'leagues': paged_leagues
+        'leagues': leagues
     }
     return render(request, 'matches/leagues.html', context)
     
 
 def matchLeague(request, league_slug):
-    matches = Match.objects.order_by('-date').filter(home_team__league_slug=league_slug).filter(is_played=False)
+    league = get_object_or_404(League, slug=league_slug)
+    print(league.currentMatchday)
+    matches = Match.objects.order_by('date').filter(home_team__league_slug=league_slug).filter(is_played=False).filter(matchday = league.currentMatchday + 1)
     
 
     league = get_object_or_404(League, slug=league_slug)

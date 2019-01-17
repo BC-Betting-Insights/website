@@ -1,0 +1,22 @@
+#teams
+ for x in response['competitions']:
+        if (x['plan'] == 'TIER_ONE'):
+            connection.request('GET', '/v2/competitions/' + x['code'] + '/teams', None, headers)
+            teams = json.loads(connection.getresponse().read().decode())
+            for i in teams['teams']:
+                output = Team(id= i['id'], name =i['name'], division_id = x['id'], league_slug = slugify(x['name']), slug=slugify(i['name']))
+                output.save()
+                
+for i in matches['teams']:
+        output = Team(id= i['id'], name =i['name'], division_id = matches['competition']['id'], league_slug = slugify(matches['competition']['name']), slug=slugify(i['name']))
+        output.save()
+
+
+#matches
+    for i in matches['matches']:
+        played = False
+        if i['status'] == 'FINISHED':
+            played = True
+        # i['utcDate'] = parse(i['utcDate']).date()
+        output = Match(id= i['id'], date = parse(i['utcDate']).date(), home_goals =i['score']['fullTime']['homeTeam'], away_goals =i['score']['fullTime']['awayTeam'], home_goals_first_half =i['score']['halfTime']['homeTeam'], away_goals_first_half =i['score']['halfTime']['awayTeam'], home_possession = 50, home_shots_target =0, away_shots_target = 0, is_played = played, away_team_id = i['awayTeam']['id'], home_team_id = i['homeTeam']['id'], time = parse(i['utcDate']).time(), league_slug = slugify(matches['competition']['name']), slug=slugify(i['homeTeam']['name'] + 'v' + i['awayTeam']['name']))
+        output.save()
