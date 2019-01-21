@@ -6,6 +6,7 @@ class League(models.Model):
     country = models.CharField(max_length=200)
     slug = models.SlugField()
     currentMatchday = models.IntegerField(null=True)
+    count = models.IntegerField(null=True)
 
     def save(self, *args, **kwargs):
         if not self.id:
