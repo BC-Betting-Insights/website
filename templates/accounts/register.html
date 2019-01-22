@@ -3,8 +3,16 @@
 {% block title %} | Register {% endblock %}
 
 
-
 {% block content %}
+
+
+{% if user.is_authenticated %}
+
+<meta http-equiv = "refresh" content = "0; url = {% url 'dashboard' %}"/>
+
+{% else %}
+
+
 <section id="register" class="bg-light py-5">
      <div class="container">
           <div class="row">
@@ -51,4 +59,8 @@
           </div>
      </div>
 </section>
+
+{% endif %}
+
+
 {% endblock %}
