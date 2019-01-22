@@ -1,11 +1,11 @@
 from django.urls import path
-from . import views
+from .views import Teams
 
 urlpatterns = [
-    path('', views.index, name='teams'),
-    path('leagues', views.teamLeagues, name='teamLeagues'),
-    path('leagues/<str:league_slug>', views.teamLeague, name='teamLeague'),
-    path('leagues/<str:league_slug>/<str:team_slug>', views.team, name='team'),
-    path('search', views.search, name='search'),
+    path('', Teams.index, name='teams'),
+    path('leagues', Teams.teamLeagues, name='teamLeagues'),
+    path('leagues/<str:league_slug>', Teams.teamLeague, name='teamLeague'),
+    path('leagues/<str:league_slug>/<str:team_slug>', Teams.team, name='team'),
+    path('search', Teams.search, name='search'),
 ]
 

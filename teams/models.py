@@ -3,6 +3,7 @@ from django.db.models import Q, F, Sum
 from leagues.models import League
 from matches.models import Match
 from django.template.defaultfilters import slugify
+from datetime import datetime
 # from django.apps import apps
 # Matches = apps.get_model('app1', 'Matches')
 
@@ -12,6 +13,8 @@ class Team(models.Model):
     slug = models.SlugField()
     league_slug = models.SlugField()
     position = models.IntegerField(null = True)
+    created_at = models.DateTimeField(auto_now_add=True, null = True)
+    updated_at = models.DateTimeField(auto_now=True, null = True)
 
     def save(self, *args, **kwargs):
         if not self.id:

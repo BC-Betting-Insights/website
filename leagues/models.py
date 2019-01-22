@@ -1,5 +1,6 @@
 from django.db import models
 from django.template.defaultfilters import slugify
+from datetime import datetime
 
 class League(models.Model):
     league_name = models.CharField(max_length=200)
@@ -7,6 +8,8 @@ class League(models.Model):
     slug = models.SlugField()
     currentMatchday = models.IntegerField(null=True)
     count = models.IntegerField(null=True)
+    created_at = models.DateTimeField(auto_now_add=True, null = True)
+    updated_at = models.DateTimeField(auto_now=True,  null = True)
 
     def save(self, *args, **kwargs):
         if not self.id:
