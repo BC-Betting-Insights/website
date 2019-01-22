@@ -1,15 +1,11 @@
 {% extends 'base.html' %}
 
 {% load humanize %}
-<<<<<<< HEAD
 {% load static %}
-=======
->>>>>>> 8ea43d0fc806d253e8a109324618d613018b1f5c
 
 {% block title %} | Welcome {% endblock %}
 
 {% block content %}
-<<<<<<< HEAD
 
     
 <section class="py-5 bg-secondary text-white">
@@ -59,131 +55,4 @@
 
 
 
-=======
-  <!-- Showcase -->
-  <section id="showcase">
-        <div class="container text-center">
-          <div class="home-search p-5">
-            <div class="overlay p-5">
-              <h1 class="display-4 mb-4">
-                Betting Just Got So Much Better
-              </h1>
-              <p class="lead">Search for your favourite matches </p>
-              <div class="search">
-                <form action="{% url 'matchSearch' %}">
-                  <!-- Form Row 1 -->
-                  <div class="form-row">
-                    <div class="col-md-4 mb-3">
-                      <label class="sr-only">Team</label>
-                      <input type="text" name="team" class="form-control" placeholder="Team">
-                    </div>
-    
-                    <div class="col-md-4 mb-3">
-                      <label class="sr-only">League</label>
-                      <select name="league" class="form-control">
-                        <option selected="true" disabled="disabled">League</option>
-                        {% for league in leagues %}
-                        <option value = '{{league.league_name}}'>{{league.league_name}}</option>
-                        {% endfor %}
-                      </select>
-                    </div>
-                  </div>
-                  <!-- Form Row 2 -->
-                  <div class="form-row">
-                    <div class="col-md-6 mb-3">
-                        <label class="sr-only">Date</label>
-                        <input type="date" name="date" class="form-control" placeholder="Date">
-                    </div>
-                    <div class="col-md-6 mb-3">
-                    </div>
-                  </div>
-                  <button class="btn btn-secondary btn-block mt-4" type="submit">Submit form</button>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-<br>
-      <!--Alerts-->
-      {% include 'partials/_alerts.html' %}
-    
-      <!-- Listings -->
-      <section id="listings" class="py-5">
-        <div class="container">
-          <h3 class="text-center mb-3">Upcoming Matches</h3>
-          <div class="row">
-            {% if matches %}
-            {% for match in matches %}
-            <div class="col-md-6 col-lg-4 mb-4">
-              <div class="card listing-preview">
-                <img class="card-img-top" src="assets/img/homes/home-1.jpg" alt="">
-                <div class="card-img-overlay">
-                </div>
-                <div class="card-body">
-                  <div class="listing-heading text-center">
-                      <h4 class="text-primary"><a href="{% url 'team' match.home_team.division.id match.home_team.slug %}">{{match.home_team}}</a> v <a href="{% url 'team' match.away_team.division.slug match.away_team.slug %}">{{match.away_team}}</a></h4>
-                  </div>
-                  <hr>
-                  <div class="row py-2 text-secondary">
-                      <div class="col-6">
-                        Prob of First Half Goal Based on Home Team's Performance at Home: {{ match.prob_goal_fh_home }}</div>
-                      <div class="col-6">
-                          Prob of First Half Goal Based on Away Team's Performance Away: {{ match.prob_goal_fh_away }}</div>
-                    </div>
-                    <div class="row py-2 text-secondary">
-                        <div class="col-6">
-                            Prob of Second Half Goal Based on Home Team's Performance at Home: {{ match.prob_goal_sh_home }}</div>
-                          <div class="col-6">
-                              Prob of Second Half Goal Based on Away Team's Performance Away: {{ match.prob_goal_sh_away }}</div>
-                    </div>
-                  <div class="row text-secondary pb-2">
-                      <i class="fas fa-clock"></i>{{ match.date }}
-                  </div>
-                  <hr>
-                  <a href="{% url 'match' match.home_team.division.slug match.slug %}" class="btn btn-primary btn-block">More Info</a>
-                </div>
-              </div>
-            </div>
-            {% endfor %}
-            {% else %}
-              <div class="col-md-12">
-                <p>No Matches Available</p>
-              </div>
-            {% endif %}
-            
-           
-          </div>
-        </div>
-      </section>
-    
-      <section id="services" class="py-5 bg-secondary text-white">
-        <div class="container">
-          <div class="row text-center">
-            <div class="col-md-4">
-              <i class="fas fa-comment fa-4x mr-4"></i>
-              <hr>
-              <h3>Consulting Services</h3>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, debitis nam! Repudiandae, provident iste consequatur
-                hic dignissimos ratione ea quae.</p>
-            </div>
-            <div class="col-md-4">
-              <i class="fas fa-home fa-4x mr-4"></i>
-              <hr>
-              <h3>Propery Management</h3>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, debitis nam! Repudiandae, provident iste consequatur
-                hic dignissimos ratione ea quae.</p>
-            </div>
-            <div class="col-md-4">
-              <i class="fas fa-suitcase fa-4x mr-4"></i>
-              <hr>
-              <h3>Renting & Selling</h3>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, debitis nam! Repudiandae, provident iste consequatur
-                hic dignissimos ratione ea quae.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-    
->>>>>>> 8ea43d0fc806d253e8a109324618d613018b1f5c
 {% endblock %}

@@ -5,7 +5,7 @@ from datetime import datetime
 class League(models.Model):
     league_name = models.CharField(max_length=200)
     country = models.CharField(max_length=200)
-    slug = models.SlugField()
+    slug = models.SlugField(max_length=200)
     currentMatchday = models.IntegerField(null=True)
     count = models.IntegerField(null=True)
     created_at = models.DateTimeField(auto_now_add=True, null = True)

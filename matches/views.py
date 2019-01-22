@@ -2,13 +2,10 @@ from django.shortcuts import render, get_object_or_404
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from leagues.models import League
 from .models import Match
-<<<<<<< HEAD
-=======
 from markets.models import Market
 from django.db.models import Q, F, Sum
 from itertools import chain
 import numpy as np
->>>>>>> 8ea43d0fc806d253e8a109324618d613018b1f5c
 
 
 def index(request):
@@ -22,31 +19,19 @@ def matchLeagues(request):
     paged_leagues = paginator.get_page(page)
 
     context = {
-<<<<<<< HEAD
-        'leagues': paged_leagues
-=======
         'leagues': leagues
->>>>>>> 8ea43d0fc806d253e8a109324618d613018b1f5c
     }
     return render(request, 'matches/leagues.html', context)
     
 
 def matchLeague(request, league_slug):
-<<<<<<< HEAD
-    matches = Match.objects.order_by('-date').filter(home_team__league_slug=league_slug).filter(is_played=False)
-=======
     league = get_object_or_404(League, slug=league_slug)
     matches = Match.objects.order_by('date').filter(home_team__league_slug=league_slug).filter(is_played=False).filter(matchday = league.currentMatchday + 1)
->>>>>>> 8ea43d0fc806d253e8a109324618d613018b1f5c
     
 
     league = get_object_or_404(League, slug=league_slug)
 
-<<<<<<< HEAD
-    paginator = Paginator(matches, 6)
-=======
     paginator = Paginator(matches, 10)
->>>>>>> 8ea43d0fc806d253e8a109324618d613018b1f5c
     page = request.GET.get('page')
     paged_matches = paginator.get_page(page)
 
@@ -60,13 +45,6 @@ def matchLeague(request, league_slug):
 def match(request, league_slug, match_slug):
     league = get_object_or_404(League, slug=league_slug)
     match = get_object_or_404(Match, slug=match_slug)
-<<<<<<< HEAD
-
-    context = {
-        'league': league,
-        'match' : match
-    }
-=======
     markets = Market.objects.order_by('name')
 
     # filter for the teams involved
@@ -226,7 +204,6 @@ def match(request, league_slug, match_slug):
         criteria_not = [obj for obj in queryset_prob if obj not in queryset_prob_result]
         context['matches_not'] = criteria_not
 
->>>>>>> 8ea43d0fc806d253e8a109324618d613018b1f5c
     return render(request, 'matches/match.html', context)
 
 def matchSearch(request):
@@ -249,11 +226,7 @@ def matchSearch(request):
     if 'date' in request.GET:
         date = request.GET['date']
         if date:
-<<<<<<< HEAD
-            queryset_match = queryset_match.filter(date = date )
-=======
             queryset_match = queryset_match.filter(date = date)
->>>>>>> 8ea43d0fc806d253e8a109324618d613018b1f5c
 
     context = {
         'matches': queryset_match,
