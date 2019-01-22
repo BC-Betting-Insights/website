@@ -21,16 +21,330 @@
      </div>
 </section>
 
-<h4 style="text-align:center"><a href="{% url 'team' match.home_team.division.slug match.home_team.slug %}">{{match.home_team}}</a> v <a href="{% url 'team' match.away_team.division.slug match.away_team.slug %}">{{match.away_team}}</a></h4>
-<div class="row py-2 text-secondary">
-          <div class="col-3">
-                    Prob of First Half Goal Based on Home Team's Performance at Home: {{ match.prob_goal_fh_home }}</div>
-                  <div class="col-3">
-                      Prob of First Half Goal Based on Away Team's Performance Away: {{ match.prob_goal_fh_away }}</div>
-                      <div class="col-3">
-                              Prob of Second Half Goal Based on Home Team's Performance at Home: {{ match.prob_goal_sh_home }}</div>
-                            <div class="col-3">
-                                Prob of Second Half Goal Based on Away Team's Performance Away: {{ match.prob_goal_sh_away }}</div>
-     <hr>
+<h4 style="text-align:center"><a href="{% url 'team' match.home_team.division.slug match.home_team.slug %}">{{match.home_team}}</a>
+     v <a href="{% url 'team' match.away_team.division.slug match.away_team.slug %}">{{match.away_team}}</a></h4>
+
+<!-- Showcase -->
+<div class="container text-center">
+     <div class="overlay p-5">
+          <h3 >What Games Do You Want To Look At?</h3>
+          <div class="search" style="text-align: center">
+               <form action="{% url 'match' league.slug match.slug %}">
+                    <div class="form-row">
+                         <div class="col-md-3 mb-3">
+                              <label>{{match.home_team.name}}</label>
+                              <select name="home" class="form-control" id="home">
+                                   <option selected="true" value="all" id="home_all">All</option>
+                                   <option value="home" 
+                                   {% if 'home' == values.home %}
+                                   selected 
+                                   {% endif %}
+                                   id ='home_home'>Just {{match.home_team.name}} Home Games</option>
+                                   <option value="none" id="home_none"
+                                   {% if 'none' == values.home %} 
+                                   selected {% endif %}
+                                   >Not Included</option>
+                              </select>
+                         </div>
+                         <div class="col-md-3 mb-3">
+                              <label>{{match.away_team.name}}</label>
+                              <select name="away" class="form-control" id='away'>
+                                   <option selected="true" value="all" id ="away_all">All</option>
+                                   <option value="away" id="away_away"
+                                   {% if 'away' == values.away %} 
+                                   selected 
+                                   {% endif %}
+                                   >Just {{match.away_team.name}} Away Games</option>
+                                   <option value="none" id="away_none"
+                                   {% if 'none' == values.away %}
+                                   selected 
+                                   {% endif %}
+                                   >Not Included</option>
+                              </select>
+                         </div>
+                         <div class="col-md-3 mb-3">
+                              <label>Previous Number of Matchdays</label>
+                              <select name="previous_games" class="form-control">
+                                   <option selected="true" value="all">All</option>
+                                   {% for x in range %}
+                                   <option value={{x}} 
+                                   {% if x == values.previous_games %}
+                                        selected 
+                                        {% endif %}
+                                        >{{x}}</option>
+                                   {% endfor %}
+                              </select>
+
+
+                         </div>
+                         <div class="col-md-3 mb-3">
+                              <label>League Position</label>
+                              <select name="league_position_dir" class="form-control">
+                                   <option value="below" 
+                                   {% if 'below' == values.league_position_dir %} 
+                                   selected 
+                                   {% endif %}
+                                   >Below and Including</option>
+                                   <option value="above" 
+                                   {% if 'above' == values.league_position_dir %} 
+                                   selected 
+                                   {% endif %}>Above and Including</option>
+                              </select>
+                              <select name="league_position" class="form-control">
+                                   {% for x in number_teams %}
+                                   <option value={{x}} 
+                                   {% if x == values.league_position %} 
+                                   selected 
+                                   {% endif %}
+                                   >{{x}}</option>
+                                   {% endfor %}
+                              </select>
+
+                         </div>
+                         <div class="col-md-3 mb-3">
+                              <label>Half Time Result</label>
+                              <select name="half_time" class="form-control">
+                                   <option value="na" 
+                                   {% if 'na' == values.half_time %} 
+                                   selected 
+                                   {% endif %}
+                                   >Don't Include</option>
+                                   <option value="win" 
+                                   {% if 'win' == values.half_time %} 
+                                   selected {% endif %}
+                                   >Winning</option>
+                                   <option value="draw" 
+                                   {% if 'draw' == values.half_time %} 
+                                   selected 
+                                   {% endif %}
+                                   >Drawing</option>
+                                   <option value="lose" 
+                                   {% if 'lose' == values.half_time %} 
+                                   selected 
+                                   {% endif %}
+                                   >Losing</option>
+                                   <option value="no_goals" 
+                                   {% if 'no_goals' == values.half_time %} 
+                                   selected 
+                                   {% endif %}
+                                   >0-0</option>
+                              </select>
+                         </div>
+                    </div>
+                    <div class="form-row" style="display:inline-block"> <h3>Now Select Your Criteria</h3></div>
+                    <!-- Form Row 1 -->
+                    <div class="form-row">
+                         <div class="col-md-3 mb-3">
+                              <label>Result</label>
+                              <select name="result" class="form-control">
+                                   <option value="all" 
+                                   {% if 'all' == values.result %} 
+                                   selected 
+                                   {% endif %}
+                                   > All</option>
+                                   <option value="win" 
+                                   {% if 'win' == values.result %} 
+                                   selected 
+                                   {% endif %}
+                                   >Wins</option>
+                                   <option value="draw" 
+                                   {% if 'draw' == values.result %} 
+                                   selected 
+                                   {% endif %}
+                                   >Draws</option>
+                                   <option value="lose" 
+                                   {% if 'lose' == values.result %} 
+                                   selected 
+                                   {% endif %}
+                                   >Losses</option>
+                              </select>
+                         </div>
+                         <div class="col-md-3 mb-3">
+                              <label>BTTS</label>
+                              <select name="BTTS" class="form-control" id="BTTS">
+                                   <option value="na" id="btts_na"
+                                   {% if 'na' == values.BTTS %} 
+                                   selected 
+                                   {% endif %}
+                                   >Don't Include</option>
+                                   <option value="yes" id='btts_yes'
+                                   {% if 'yes' == values.BTTS %} 
+                                   selected 
+                                   {% endif %}
+                                   >Yes</option>
+                                   <option value="no" id="btts_no"
+                                   {% if 'no' == values.BTTS %} 
+                                   selected 
+                                   {% endif %}
+                                   >No</option>
+                                   <option value="home" id="btts_home"
+                                   {% if 'home' == values.BTTS %} 
+                                   selected 
+                                   {% endif %}
+                                   >{{match.home_team}} Clean Sheets</option>
+                                   <option value="away" id="btts_away"
+                                   {% if 'away' == values.BTTS %} 
+                                   selected 
+                                   {% endif %}
+                                   >{{match.away_team}} Clean Sheets</option>
+                                   <option value="home_f" id="btts_home_f"
+                                   {% if 'home_f' == values.BTTS %} 
+                                   selected 
+                                   {% endif %}
+                                   >{{match.home_team}} Failed to Score</option>
+                                   <option value="away_f" id="btts_away_f"
+                                   {% if 'away_f' == values.BTTS %} 
+                                   selected 
+                                   {% endif %}>
+                                   {{match.away_team}} Failed to Score</option>
+                              </select>
+                         </div>
+
+                         <div class="col-md-3 mb-3">
+                              <label>Over/Under</label>
+                              <select name="over_under" id="over_under" class="form-control">
+                                   <option value="na" 
+                                   {% if 'na' == values.over_under %} 
+                                   selected 
+                                   {% endif %}
+                                    data-sync="na">Don't Include</option>
+                                   <option value="Over" 
+                                   {% if 'Over' == values.over_under %} 
+                                   selected 
+                                   {% endif %}
+                                   data-sync="over"
+                                   >Over</option>
+                                   <option value="Under" 
+                                   {% if 'Under' == values.over_under %} 
+                                   selected 
+                                   {% endif %}
+                                   data-sync="under"
+                                   >Under</option>
+                              </select>
+                         </div>
+
+                         <div class="col-md-3 mb-3">
+                              <label>Number of Goals</label>
+                              <select name="number_goals" class="form-control" id ="number_goals">
+                                   <option value="na" 
+                                   {% if 'na' == values.number_goals %} 
+                                   selected 
+                                   {% endif %}
+                                   >Not Selected</option>
+                                   {% for market in markets %}
+                                   <option value="{{ market.name }}" 
+                                   {% if market.name == values.number_goals %} 
+                                   selected
+                                   {% endif %}
+                                   >{{market.name}}</option>
+                                   {% endfor %}
+                              </select>
+                         </div>
+                         <div class="col-md-3 mb-3">
+                              <label>Goals</label>
+                              <select name="goals" class="form-control" id="goals">
+                                   <option value="Total" 
+                                   {% if 'Total' == values.goals %} 
+                                   selected 
+                                   {% endif %}
+                                   >Total</option>
+
+                                   <option value="Score" 
+                                   {% if 'Score' == values.goals %} 
+                                   selected 
+                                   {% endif %}
+                                   >Score</option>
+
+                                   <option value="Concede" 
+                                   {% if 'Concede' == values.goals %} 
+                                   selected 
+                                   {% endif %}
+                                   >Conceded</option>
+                              </select>
+                         </div>
+                         <div class="col-md-3 mb-3">
+                              <label>Time Period</label>
+                              <select name="period" class="form-control">
+                                   <option value="Full" 
+                                   {% if 'Full' == values.period %} 
+                                   selected 
+                                   {% endif %}
+                                   >Full</option>
+                                   <option value="FH" 
+                                   {% if 'FH' == values.period %} 
+                                   selected 
+                                   {% endif %}
+                                   >First Half</option>
+                                   <option value="SH" 
+                                   {% if 'SH' == values.period %} 
+                                   selected {% endif %}
+                                   >Second Half</option>
+                              </select>
+                         </div>
+                         
+
+                    </div>
+                    
+                    <button class="btn btn-secondary btn-block mt-4" type="submit"> Submit form</button>
+               </form>
+          </div>
+     </div>
 </div>
+
+<div class="container">
+     <h4>{% if games %}
+          Games: {{games}} <br>
+          Probability: {{prob}}</h4>
+</div>
+
+<div class="form-row">
+     <div class="col-md-5 mb-3">
+          <h2>Criteria Met</h2>
+          <table class="table">
+               <tbody>
+                    <tr>
+                         <td>Match</td>
+                         <td>Score</td>
+                         <td>Date</td>
+                    </tr>
+                    {% for match in matches %}
+                    <tr>
+
+                         <td> <a href="{% url 'match' league.slug match.slugif %}">{{match.title}}</a></td>
+                         <td>{{match.score}}</td>
+                         <td>{{match.date}}</td>
+
+                    </tr>
+                    {% endfor %}
+               </tbody>
+          </table>
+     </div>
+
+     <div class="col-md-5 mb-3">
+          <h2>Criteria Not Met</h2>
+          <table class="table">
+               <tbody>
+                    <tr>
+                         <td>Match</td>
+                         <td>Score</td>
+                         <td>Date</td>
+                    </tr>
+                    {% for match in matches_not %}
+                    <tr>
+
+                         <td> <a href="{% url 'match' league.slug match.slugif %}">{{match.title}}</a></td>
+                         <td>{{match.score}}</td>
+                         <td>{{match.date}}</td>
+
+                    </tr>
+                    {% endfor %}
+               </tbody>
+          </table>
+     </div>
+</div>
+
+
+
+
+{% endif %}
 {% endblock %}
