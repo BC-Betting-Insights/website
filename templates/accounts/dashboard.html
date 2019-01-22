@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %} | Dashboard {% endblock %}
+
+{% block content %}
+
+
+<!-- Breadcrumb -->
+<section id="bc" class="mt-3">
+          <div class="container">
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                  <a href="{% url 'index' %}">
+                    <i class="fas fa-home"></i> Home</a>
+                </li>
+                <li class="breadcrumb-item active"> Dashboard</li>
+              </ol>
+            </nav>
+          </div>
+        </section>
+      
+        <section id="dashboard" class="py-4">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <h2>Welcome {{ user.first_name }} </h2>
+                <p>Manage Your Account</p>
+                <table class="table">
+                  <tbody>
+                    <tr>
+                      <td>Update Password</td>
+                    </tr>
+                    <tr>
+                      <td> Manage Subscription</td>
+                    </tr>
+                    <tr>
+                      <td>                
+                        <a href="javascript:{document.getElementById('logout').submit()}" class="nav-link">
+                          <i class="fas fa-sign-out-alt"></i>Logout
+                        </a>
+                        <form action="{% url 'logout' %}" id="logout" method="POST">
+                          {% csrf_token %}
+                          <input type="hidden">
+                        </form>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+
+{% endblock %}

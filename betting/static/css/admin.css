@@ -1,0 +1,16 @@
+div.breadcrumbs {
+    background: turquoise;
+    color:navy
+}
+
+div.breadcrumbs a {
+    color: black
+}
+
+a:link, a:visited {
+    color:blue
+}
+
+#branding h1 {
+    color: white
+}

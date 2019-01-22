@@ -1,0 +1,188 @@
+{% extends 'base.html' %}
+
+{% block title %} | {{team.name}} {% endblock %}
+
+{% block content %}
+<!-- Breadcrumb -->
+<section id="bc" class="mt-3">
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="{% url 'index' %}">
+            <i class="fas fa-home"></i> Home</a>
+        </li>
+        <li class="breadcrumb-item"><a href="{% url 'teamLeagues' %}"> Browse Teams by League</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'teamLeague' league.slug %}">{{league.league_name}}</a></li>
+        <li class="breadcrumb-item active"><a href="{% url 'team' league.slug team.slug %}">{{team.name}}</a></li>
+      </ol>
+    </nav>
+  </div>
+</section>
+<div class="row py-2 text-secondary">
+  <div class="col-2">
+    Games Played: {{team.games}}
+  </div>
+  <div class="col-2">
+    Goals Scored: {{ team.goals_for }}
+    <br>
+  </div>
+  <div class="col-2">
+    Goals Per Game: {{ team.goals_for_per_game }}
+    <br>
+  </div>
+  <div class="col-2">
+    Goals Conceded: {{ team.goals_against }}
+    <br>
+  </div>
+  <div class="col-2">
+    Goals Conceded Per Game: {{ team.goals_against_per_game }}
+    <br>
+  </div>
+  <div class="col-2">
+    Clean Sheets: {{ team.clean_sheets }}
+    <br>
+  </div>
+
+  <div class="col-2">
+    Home Games Played: {{team.home_games}}
+  </div>
+  <div class="col-2">
+    Home Goals Scored: {{ team.home_goals_for }}
+    <br>
+  </div>
+  <div class="col-2">
+    Home Goals Per Game: {{ team.home_goals_for_per_game }}
+    <br>
+  </div>
+  <div class="col-2">
+    Home Goals Conceded: {{ team.home_goals_against }}
+    <br>
+  </div>
+  <div class="col-2">
+    Home Goals Conceded Per Game: {{ team.home_goals_against_per_game }}
+    <br>
+  </div>
+  <div class="col-2">
+    Home Clean Sheets: {{ team.home_clean_sheets }}
+    <br>
+  </div>
+
+  <div class="col-2">
+    Away Games Played: {{team.away_games}}
+  </div>
+  <div class="col-2">
+    Away Goals Scored: {{ team.away_goals_for }}
+    <br>
+  </div>
+  <div class="col-2">
+    Away Goals Per Game: {{ team.away_goals_for_per_game }}
+    <br>
+  </div>
+  <div class="col-2">
+    Away Goals Conceded: {{ team.away_goals_against }}
+    <br>
+  </div>
+  <div class="col-2">
+    Away Goals Conceded Per Game: {{ team.away_goals_against_per_game }}
+    <br>
+  </div>
+  <div class="col-2">
+    Away Clean Sheets: {{ team.away_clean_sheets }}
+    <br>
+  </div>
+  <hr>
+</div>
+  <!-- Listings -->
+  <section id="listings" class="py-4">
+    <div class="container">
+        <h2 style="text-align:center">Previous Matches</h2>
+        <hr>
+      <div class="row">
+          
+        {% if matches %}
+        {% for match in matches %}
+        <div class="col-md-6 col-lg-4 mb-4">
+          <div class="card listing-preview">
+            <img class="card-img-top" src="assets/img/homes/home-1.jpg" alt="">
+            <div class="card-img-overlay">
+            </div>
+            <div class="card-body">
+              <div class="listing-heading text-center">
+                <h4 class="text-primary"><a href="{% url 'team' match.home_team.division.slug match.home_team.slug %}">{{ match.home_team}}</a> v <a href="{% url 'team' match.away_team.division.slug match.away_team.slug %}">{{match.away_team}}</a></h4>
+                <p>{{ match.score }}</p>
+                <p>({{ match.first_half_score }})</p>
+              </div>
+              <hr>
+              <div class="row py-2 text-secondary">
+                <div class="col-6">
+                  1st Half Goals: {{ match.first_half_goals }}</div>
+                <div class="col-6">
+                  2nd Half Goals: {{ match.second_half_goals }}</div>
+              </div>
+              <div class="row py-2 text-secondary">
+                <div class="col-6">
+                  Number of games played: {{ match.home_team_games }}</div>
+               <div class="col-6">
+                  Number of games played: {{ match.away_team_games }}</div>
+              </div>
+              <hr>
+              <div class="row py-2 text-secondary">
+              </div>
+              <div class="row text-secondary pb-2">
+                <i class="fas fa-clock"></i>{{ match.date }}
+              </div>
+              <hr>
+              <a href="{% url 'match' league.slug match.slug %}" class="btn btn-primary btn-block">More Info</a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <div class="col-md-12">
+          <p>No Matches Available</p>
+        </div>
+        {% endif %}
+
+
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          {% if matches.has_other_pages %}
+          <ul class="pagination">
+            {% if matches.has_previous %}
+            <li class="page-item">
+              <a href="?page={{matches.previous_page_number}}" class="page-link">&laquo;</a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+              <a class="page-link">&laquo;</a>
+            </li>
+            {% endif %}
+            {% for i in matches.paginator.page_range %}
+            {% if matches.number == i %}
+            <li class="page-item active">
+              <a class="page-link">{{i}}</a>
+            </li>
+            {% else %}
+            <li class="page-item">
+              <a href="?page={{i}}" class="page-link">{{i}}</a>
+            </li>
+            {% endif %}
+            {% endfor %}
+            {% if matches.has_next %}
+            <li class="page-item">
+              <a href="?page={{matches.next_page_number}}" class="page-link">&raquo;</a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+              <a class="page-link">&raquo;</a>
+            </li>
+            {% endif %}
+          </ul>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

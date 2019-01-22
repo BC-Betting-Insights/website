@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+
+{% block content %}
+<br>
+<section>
+    <div class="container" style="text-align: center">
+        <h1>Millions of insights from thousands of games</h1>
+        <h4>Join today for access to a whole new world of in-depth stats and tips. </h4>
+        <h4>Select the price plan that suits you best:</h4>
+    </div>
+    <div class="container">
+        <div class="row">
+
+            <div class="column">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <p class="card-title">Weekly Membership</p>
+                    </div>
+                    <div class="card-content">
+                        <div class="content">
+                            <ul>
+                                <li>All feautures</li>
+                                <li>Latest and best tips</li>
+                                <li>Unlimited use of stats and filters</li>
+                            </ul>
+                            <a href="{% url 'faq' %}" class="btn btn-block btn-primary">Sign up £5 per week</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="column">
+                    <div class="card">
+                        <div class="card-header bg-primary text-white">
+                            <p class="card-title">Monthly Membership</p>
+                        </div>
+                        <div class="card-content">
+                            <div class="content">
+                                <ul>
+                                    <li>All feautures</li>
+                                    <li>Latest and best tips</li>
+                                    <li>Unlimited use of stats and filters</li>
+                                </ul>
+                                <a href="{% url 'faq' %}" class="btn btn-block btn-primary">Sign up £12 per month</a>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+
+            <div class="column">
+                    <div class="card">
+                        <div class="card-header bg-primary text-white">
+                            <p class="card-title">Quarterly Membership</p>
+                        </div>
+                        <div class="card-content">
+                            <div class="content">
+                                <ul>
+                                    <li>All feautures</li>
+                                    <li>Latest and best tips</li>
+                                    <li>Unlimited use of stats and filters</li>
+                                </ul>
+                                <a href="{% url 'faq' %}" class="btn btn-block btn-primary">Sign up £30 for 3 months</a>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+
+            <div class="column">
+                    <div class="card">
+                        <div class="card-header bg-primary text-white">
+                            <p class="card-title">Yearly Membership</p>
+                        </div>
+                        <div class="card-content">
+                            <div class="content">
+                                <ul>
+                                    <li>All feautures</li>
+                                    <li>Latest and best tips</li>
+                                    <li>Unlimited use of stats and filters</li>
+                                </ul>
+                                <a href="{% url 'faq' %}" class="btn btn-block btn-primary">Sign up £100 per year</a>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</section>
+<hr>
+<section>
+    <div class="container" style="text-align: center">
+        <h1>Reviews</h1>
+        <h4>See below for reviews from satisfied customers:</h4>
+    </div>
+    <div class="container">
+        <div class="card-deck">
+            <div class="card text-center">
+                <div class="card-block">
+                    <h4 class="card-header bg-primary text-white">Bash the bookies!</h4>
+                    <p class="card-text">
+                        I made an amazing £43994 in my first week!<br />
+                        I managed to spend it all in one night at the strip club!<br />
+                        A night i will never forget!<br/>
+                    </p>
+                </div>
+                <div class="card-footer bg-primary text-white">
+                    Kaif, 24 from Bethlehem
+                </div>
+            </div>
+    
+            <div class="card text-center">
+                <div class="card-block">
+                    <h4 class="card-header bg-primary text-white"> Out of this world!</h4>
+                    <p class="card-text">
+                        The best place for stats on the internet. <br>
+                        WattBet makes BetDyanmo look so shit!!! <br>
+                        14/10 would recommend
+                    </p>
+                </div>
+                <div class="card-footer bg-primary text-white">
+                    Gary, 25 from BetDynamo
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</section>
+
+
+{% endblock %}
