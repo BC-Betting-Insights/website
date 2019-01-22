@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'matches.apps.MatchesConfig',
     'teams.apps.TeamsConfig',
     'leagues.apps.LeaguesConfig',
+    'markets.apps.MarketsConfig',
     'accounts.apps.AccountsConfig',
     'contacts.apps.ContactsConfig',
     'django.contrib.admin',

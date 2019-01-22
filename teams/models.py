@@ -11,6 +11,7 @@ class Team(models.Model):
     division = models.ForeignKey(League, related_name='league', on_delete=models.DO_NOTHING)
     slug = models.SlugField()
     league_slug = models.SlugField()
+    position = models.IntegerField(null = True)
 
     def save(self, *args, **kwargs):
         if not self.id:
@@ -109,7 +110,10 @@ class Team(models.Model):
         count = Match.objects.filter(away_team = self.id, is_played = True, home_goals=0).count()
         return count
     
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 8ea43d0fc806d253e8a109324618d613018b1f5c
     def __str__(self):
         return self.name
