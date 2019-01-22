@@ -4,6 +4,8 @@
 
 {% block content %}
 
+{% if user.is_authenticated %}
+
 <!-- Breadcrumb -->
 <section id="bc" class="mt-3">
           <div class="container">
@@ -28,16 +30,21 @@
                 <table class="table">
                   <tbody>
                     <tr>
-                      <td>Update Details</td>
-                    </tr>
-                    <tr>
                       <td>Update Password</td>
                     </tr>
                     <tr>
                       <td> Manage Subscription</td>
                     </tr>
                     <tr>
-                      <td>Logout</td>
+                      <td>                
+                        <a href="javascript:{document.getElementById('logout').submit()}" class="nav-link">
+                          <i class="fas fa-sign-out-alt"></i>Logout
+                        </a>
+                        <form action="{% url 'logout' %}" id="logout" method="POST">
+                          {% csrf_token %}
+                          <input type="hidden">
+                        </form>
+                      </td>
                     </tr>
                   </tbody>
                 </table>
@@ -45,4 +52,14 @@
             </div>
           </div>
         </section>
+
+
+{% else %}
+
+<meta http-equiv = "refresh" content = "0; url = {% url 'login' %}"/>
+<alert>Hello </alert>
+
+{% endif %}
+
+
 {% endblock %}

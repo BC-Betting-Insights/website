@@ -3,6 +3,9 @@ document.querySelector('.year').innerHTML = date.getFullYear();
 
 setTimeout(function() {
      $('#message').fadeOut('slow');
+<<<<<<< HEAD
+}, 3000);
+=======
 }, 3000);
 
 window.onload=function() { 
@@ -46,3 +49,4 @@ window.onload=function() {
      document.getElementById("over_under").onchange(); // trigger when loading
 }
 
+>>>>>>> 8ea43d0fc806d253e8a109324618d613018b1f5c

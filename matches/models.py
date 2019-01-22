@@ -31,7 +31,7 @@ class Match(models.Model):
     list_date = models.DateTimeField(default = datetime.now)
     created_at = models.DateTimeField(auto_now_add=True, null = True)
     updated_at = models.DateTimeField(auto_now=True, null = True)
-    
+    matchday = models.IntegerField(null=True)
     slug = models.SlugField(max_length=200)
     league_slug = models.SlugField()
 

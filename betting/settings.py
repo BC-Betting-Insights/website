@@ -45,6 +45,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'background_task',
+    'crispy_forms',
+    'newsletters',
+    'blog',
+    'tips',
+    'subscription',
+
 ]
 
 MIDDLEWARE = [
@@ -127,6 +133,9 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
+
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'

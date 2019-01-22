@@ -9,4 +9,6 @@ urlpatterns = [
     path('teams/', include('teams.urls')),
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
+    path('newsletter/', include('newsletters.urls')),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+

@@ -2,7 +2,17 @@
 
 {% block title %} | Register {% endblock %}
 
+
 {% block content %}
+
+
+{% if user.is_authenticated %}
+
+<meta http-equiv = "refresh" content = "0; url = {% url 'dashboard' %}"/>
+
+{% else %}
+
+
 <section id="register" class="bg-light py-5">
      <div class="container">
           <div class="row">
@@ -26,12 +36,12 @@
                                         <input type="text" name="last_name" class="form-control" required>
                                    </div>
                                    <div class="form-group">
-                                        <label for="username">Username</label>
-                                        <input type="text" name="username" class="form-control" required>
+                                        <label for="email">Email</label>
+                                        <input type="email" name="email" oninput="this.value=this.value.toLowerCase()" class="form-control" required>
                                    </div>
                                    <div class="form-group">
-                                        <label for="email">Email</label>
-                                        <input type="email" name="email" class="form-control" required>
+                                        <label for="date_of_birth">Date of Birth</label>
+                                        <input type="date" name="date_of_birth" class="form-control" required>
                                    </div>
                                    <div class="form-group">
                                         <label for="password2">Password</label>
@@ -49,4 +59,8 @@
           </div>
      </div>
 </section>
+
+{% endif %}
+
+
 {% endblock %}

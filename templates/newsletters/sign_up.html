@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+{% crispy form form.helper %}
+
+{% block content %}
+<br>
+
+<div class="container" style="text-align: center">
+        <div class="col-lg-6 col-lg-offset-3" style="display: inline-block">
+            <h3 class="text-center" > Sign up for our Newsletter</h3>
+            {% if messages %}
+                {% for message in messages %}
+                    <div {% if message.tags %} class="{{message.tags}}" {% endif %} role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% else %}
+            <form method="POST">{% csrf_token %}
+                <div class="inpt-group">
+                    {% crispy form %}
+                    <hr>
+                    <input type="submit" value="Subscribe" class="btn btn-block btn-primary">
+                    <br>
+                </div>
+            </form>
+            {% endif %}
+        </div>
+</div>
+
+{% endblock %}
+

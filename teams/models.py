@@ -113,5 +113,10 @@ class Team(models.Model):
         count = Match.objects.filter(away_team = self.id, is_played = True, home_goals=0).count()
         return count
     
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> 8ea43d0fc806d253e8a109324618d613018b1f5c
     def __str__(self):
         return self.name

@@ -44,3 +44,20 @@ def contact(request):
         messages.success(request, 'Your request has been submitted, we will get back to you')
 
     return render(request, 'pages/contact.html')
+
+
+def faq(request):
+    return render(request, 'pages/faq.html')
+
+def about(request):
+    return render(request, 'pages/about.html')
+
+def blog(request):
+    return render(request, 'blog/blog.html')
+
+def subscription(request):
+    return render(request, 'subscription/subscription.html')
+
+def tips(request):
+    return render(request, 'tips/tips.html')
+

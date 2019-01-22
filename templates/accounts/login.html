@@ -4,6 +4,12 @@
 
 {% block content %}
 
+{% if user.is_authenticated %}
+
+<meta http-equiv = "refresh" content = "0; url = {% url 'dashboard' %}"/>
+
+{% else %}
+
 <section id="login" class="bg-light py-5">
      <div class="container">
           <div class="row">
@@ -19,8 +25,8 @@
                               <form action="{% url 'login' %}" method="POST">
                                    {% csrf_token %}
                                    <div class="form-group">
-                                        <label for="username">Username</label>
-                                        <input type="text" name="username" class="form-control" required>
+                                        <label for="username">Email</label>
+                                        <input type="email" name="username" class="form-control" required>
                                    </div>
 
                                    <div class="form-group">
@@ -36,4 +42,7 @@
           </div>
      </div>
 </section>
+
+
+{% endif %}
 {% endblock %}

@@ -1,10 +1,65 @@
 {% extends 'base.html' %}
 
 {% load humanize %}
+<<<<<<< HEAD
+{% load static %}
+=======
+>>>>>>> 8ea43d0fc806d253e8a109324618d613018b1f5c
 
 {% block title %} | Welcome {% endblock %}
 
 {% block content %}
+<<<<<<< HEAD
+
+    
+<section class="py-5 bg-secondary text-white">
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-md-4">
+        <i class="fas fa-futbol fa-4x mr-4"></i>
+        <hr>
+        <h3>In-depth Football Stats</h3>
+        <p>We offer a large range of football statistics from thousands of games across all of the worlds top leagues.</p>
+      </div>
+      <div class="col-md-4">
+        <i class="fas fa-stopwatch fa-4x mr-4"></i>
+        <hr>
+        <h3>Make your own choices</h3>
+        <p>Find the match you want and implement the desired filters to access the stats you need.</p>
+      </div>
+      <div class="col-md-4">
+        <i class="fas fa-comment fa-4x mr-4"></i>
+        <hr>
+        <h3>Betting Tips</h3>
+        <p>Why gamble when you can beat the bookies by following our stat backed betting tips.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section>
+  <div class="container" style="text-align: center">
+    <div class="row">
+      <div class="row mb-5 thumbs">
+        <div class="col-md-2">
+          <a href="{% static 'img/bet1.jpg' %}" data-lightbox="home-images">
+            <img src="{% static 'img/bet1.jpg' %}" alt="" class="img-fluid">
+          </a>
+        </div>
+        <div class="col-md-2">
+          <a href="{% static 'img/bet2.jpg' %}" data-lightbox="home-images">
+            <img src="{% static 'img/bet2.jpg' %}" alt="" class="img-fluid">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+=======
   <!-- Showcase -->
   <section id="showcase">
         <div class="container text-center">
@@ -130,4 +185,5 @@
         </div>
       </section>
     
+>>>>>>> 8ea43d0fc806d253e8a109324618d613018b1f5c
 {% endblock %}

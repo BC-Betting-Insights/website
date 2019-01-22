@@ -1,9 +1,6 @@
 {% load static %}
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
     <div class="container">
-        <a class="navbar-brand" href="{% url 'index' %}">
-        <img src="{% static 'img/logo.png' %}" class="logo" alt="">
-        </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup">
         <span class="navbar-toggler-icon"></span>
         </button>
@@ -18,6 +15,48 @@
             >
             <a class="nav-link" href="{% url 'index' %}">Home</a>
             </li>
+
+
+
+            <li
+            {% if 'about' in request.path %}
+            class="nav-item active mr-3"
+            {% else %}
+            class="nav-item mr-3"
+            {% endif %}
+            >
+            <a class="nav-link" href="{% url 'about' %}">About</a>
+            </li>
+            <li
+            {% if 'blog' in request.path %}
+            class="nav-item active mr-3"
+            {% else %}
+            class="nav-item mr-3"
+            {% endif %}
+            >
+            <a class="nav-link" href="{% url 'blog' %}">Blog</a>
+            </li>
+            <li
+            {% if 'subscription' in request.path %}
+            class="nav-item active mr-3"
+            {% else %}
+            class="nav-item mr-3"
+            {% endif %}
+            >
+            <a class="nav-link" href="{% url 'subscription' %}">Membership</a>
+            </li>
+            <li
+            {% if 'tips' in request.path %}
+            class="nav-item active mr-3"
+            {% else %}
+            class="nav-item mr-3"
+            {% endif %}
+            >
+            <a class="nav-link" href="{% url 'tips' %}">Tips</a>
+            </li>
+
+
+
             <li
             {% if 'teams' in request.path %}
             class="nav-item active mr-3"
@@ -47,8 +86,8 @@
                     {% else %}
                     class="nav-item mr-3"
                     {% endif %}>
-            <a class="nav-link" href="{% url 'register' %}">
-                    Welcome {{ user.username }} (Dashboard)</a>
+            <a class="nav-link" href="{% url 'dashboard' %}">
+                    My Account</a>
             </li>
             <li class="nav-item mr-3">
                 <a href="javascript:{document.getElementById('logout').submit()}" class="nav-link">
